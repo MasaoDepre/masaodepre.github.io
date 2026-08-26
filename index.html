@@ -1,19 +1,40 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Masao Dépré — Engineering Student</title>
-
+  <title>Masao Dépré — Engineering & Quantum Technologies</title>
   <meta
     name="description"
-    content="Personal website of Masao Dépré, engineering student interested in optics, photonics, quantum technologies and experimental physics."
+    content="Personal website of Masao Dépré, engineering student working on optics, photonics, quantum technologies and experimental physics."
   />
 
-  <meta name="author" content="Masao Dépré" />
-
   <style>
+    :root {
+      --bg: #080a0f;
+      --bg-soft: #11141c;
+      --text: #f5f7fb;
+      --muted: #9da3b4;
+      --accent: #78a7ff;
+      --accent-2: #70f0d0;
+      --card: rgba(255,255,255,0.055);
+      --border: rgba(255,255,255,0.09);
+      --shadow: 0 25px 80px rgba(0,0,0,.35);
+    }
+
+    body.light {
+      --bg: #f5f7fb;
+      --bg-soft: #ffffff;
+      --text: #121620;
+      --muted: #626a7a;
+      --accent: #335dff;
+      --accent-2: #00a98f;
+      --card: rgba(255,255,255,0.75);
+      --border: rgba(20,30,50,.09);
+      --shadow: 0 18px 50px rgba(40,50,80,.10);
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -25,13 +46,12 @@
     }
 
     body {
-      font-family: Inter, Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(80, 90, 255, 0.08), transparent 30%),
-        radial-gradient(circle at top right, rgba(0, 200, 255, 0.07), transparent 25%),
-        #0b0d12;
-      color: #f4f4f5;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
+      overflow-x: hidden;
+      transition: background .35s ease, color .35s ease;
     }
 
     a {
@@ -39,18 +59,59 @@
       text-decoration: none;
     }
 
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .035;
+      z-index: 20;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    }
+
+    .orb {
+      position: fixed;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: .18;
+      pointer-events: none;
+      z-index: -2;
+      animation: floatOrb 12s ease-in-out infinite alternate;
+    }
+
+    .orb.one {
+      top: -100px;
+      left: -100px;
+      background: var(--accent);
+    }
+
+    .orb.two {
+      right: -120px;
+      top: 20%;
+      background: var(--accent-2);
+      animation-delay: 2s;
+    }
+
+    @keyframes floatOrb {
+      from { transform: translate(0,0) scale(1); }
+      to { transform: translate(60px,40px) scale(1.15); }
+    }
+
     .container {
-      width: min(1100px, 90%);
+      width: min(1160px, 90%);
       margin: auto;
     }
 
     nav {
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 10;
-      backdrop-filter: blur(14px);
-      background: rgba(11, 13, 18, 0.72);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      left: 0;
+      right: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: color-mix(in srgb, var(--bg) 75%, transparent);
+      border-bottom: 1px solid var(--border);
     }
 
     .nav-inner {
@@ -58,280 +119,436 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+      gap: 24px;
     }
 
-    .logo {
-      font-size: 1.05rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
+    .brand {
+      font-weight: 800;
+      letter-spacing: .08em;
+      font-size: .95rem;
     }
 
     .nav-links {
       display: flex;
-      gap: 24px;
-      font-size: 0.95rem;
-      color: #b8bac2;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-size: .92rem;
     }
 
-    .nav-links a:hover {
-      color: white;
+    .nav-links a {
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0;
+      height: 1px;
+      background: var(--text);
+      transition: width .2s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .theme-toggle {
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      border-radius: 12px;
+      width: 42px;
+      height: 42px;
+      cursor: pointer;
+      font-size: 1rem;
     }
 
     .hero {
-      min-height: 88vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
-      padding: 80px 0;
+      padding-top: 110px;
+      position: relative;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.4fr 0.8fr;
-      gap: 80px;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 70px;
       align-items: center;
     }
 
-    .eyebrow {
-      display: inline-block;
-      padding: 8px 14px;
-      border: 1px solid rgba(255,255,255,0.1);
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      padding: 8px 13px;
       border-radius: 999px;
-      color: #b8bac2;
-      background: rgba(255,255,255,0.03);
-      margin-bottom: 22px;
-      font-size: 0.9rem;
+      color: var(--muted);
+      font-size: .86rem;
+      margin-bottom: 24px;
+      animation: fadeUp .8s ease both;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent-2);
+      border-radius: 50%;
+      box-shadow: 0 0 18px var(--accent-2);
     }
 
     h1 {
-      font-size: clamp(3.6rem, 8vw, 7rem);
-      line-height: 0.95;
-      letter-spacing: -0.06em;
-      margin-bottom: 24px;
+      font-size: clamp(4rem, 9vw, 8.5rem);
+      line-height: .88;
+      letter-spacing: -.075em;
+      margin-bottom: 28px;
+      animation: fadeUp .9s .1s ease both;
     }
 
-    .gradient-text {
-      background: linear-gradient(90deg, #ffffff, #7ea7ff, #66e0ff);
+    .gradient {
+      background: linear-gradient(90deg, var(--text), var(--accent), var(--accent-2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .hero-text {
-      max-width: 720px;
-      font-size: 1.25rem;
-      color: #b8bac2;
+    .hero-copy {
+      max-width: 700px;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      animation: fadeUp .9s .2s ease both;
     }
 
-    .buttons {
+    .cta-row {
+      margin-top: 32px;
       display: flex;
       flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 32px;
+      gap: 12px;
+      animation: fadeUp .9s .3s ease both;
     }
 
     .btn {
+      padding: 13px 18px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      transition: transform .2s ease, background .2s ease;
+      font-weight: 700;
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      padding: 13px 19px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.1);
-      transition: 0.2s ease;
-      font-weight: 600;
-    }
-
-    .btn-primary {
-      background: white;
-      color: #111318;
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,0.035);
-      color: white;
+      gap: 8px;
     }
 
     .btn:hover {
-      transform: translateY(-2px);
+      transform: translateY(-3px);
     }
 
-    .profile-card {
-      min-height: 390px;
-      border-radius: 28px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background:
-        linear-gradient(145deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
-      padding: 28px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      box-shadow: 0 30px 70px rgba(0,0,0,0.25);
+    .btn.primary {
+      background: var(--text);
+      color: var(--bg);
     }
 
-    .profile-placeholder {
-      flex: 1;
-      border-radius: 20px;
-      margin-bottom: 24px;
-      border: 1px solid rgba(255,255,255,0.06);
+    .btn.secondary {
+      background: var(--card);
+    }
+
+    .profile {
+      position: relative;
+      min-height: 520px;
+      border: 1px solid var(--border);
+      border-radius: 30px;
       background:
-        linear-gradient(135deg, rgba(126,167,255,0.22), rgba(102,224,255,0.08)),
-        #12151d;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #9ea2ad;
+        linear-gradient(145deg, color-mix(in srgb, var(--accent) 16%, transparent), transparent 45%),
+        var(--card);
+      box-shadow: var(--shadow);
+      padding: 26px;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform .2s ease;
+    }
+
+    .profile::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.09), transparent 65%);
+      transform: translateX(-100%);
+      animation: shine 5s infinite;
+    }
+
+    @keyframes shine {
+      0%, 70% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .profile-visual {
+      height: 330px;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background:
+        radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--accent) 55%, transparent), transparent 35%),
+        radial-gradient(circle at 70% 70%, color-mix(in srgb, var(--accent-2) 45%, transparent), transparent 40%),
+        var(--bg-soft);
+      display: grid;
+      place-items: center;
+      color: var(--muted);
       text-align: center;
       padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .profile-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .profile-meta strong {
+      font-size: 1.2rem;
     }
 
     section {
-      padding: 100px 0;
+      padding: 110px 0;
     }
 
-    .section-label {
-      color: #7ea7ff;
+    .section-kicker {
+      color: var(--accent);
       text-transform: uppercase;
-      letter-spacing: 0.13em;
-      font-size: 0.8rem;
-      font-weight: 700;
-      margin-bottom: 14px;
-    }
-
-    h2 {
-      font-size: clamp(2.2rem, 5vw, 4rem);
-      letter-spacing: -0.045em;
-      margin-bottom: 28px;
-    }
-
-    .section-intro {
-      max-width: 760px;
-      color: #aaadb7;
-      font-size: 1.1rem;
-      margin-bottom: 45px;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .card {
-      padding: 26px;
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 20px;
-      background: rgba(255,255,255,0.025);
-      transition: 0.25s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      border-color: rgba(126,167,255,0.35);
-      background: rgba(255,255,255,0.045);
-    }
-
-    .card .small {
-      color: #7ea7ff;
-      font-size: 0.9rem;
-      margin-bottom: 8px;
-    }
-
-    .card h3 {
-      font-size: 1.3rem;
+      letter-spacing: .16em;
+      font-size: .78rem;
+      font-weight: 800;
       margin-bottom: 12px;
     }
 
-    .card p {
-      color: #a5a8b2;
+    h2 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      letter-spacing: -.055em;
+      line-height: .95;
+      margin-bottom: 26px;
     }
 
-    .experience {
-      display: grid;
-      gap: 18px;
-    }
-
-    .experience-row {
-      display: grid;
-      grid-template-columns: 180px 1fr;
-      gap: 30px;
-      border-top: 1px solid rgba(255,255,255,0.07);
-      padding: 28px 0;
-    }
-
-    .experience-date {
-      color: #777c89;
-      font-size: 0.95rem;
-    }
-
-    .experience-row h3 {
-      font-size: 1.4rem;
-      margin-bottom: 6px;
-    }
-
-    .experience-row p {
-      color: #a5a8b2;
+    .section-copy {
       max-width: 760px;
+      color: var(--muted);
+      font-size: 1.07rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stats {
+      margin-top: 45px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .stat {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--card);
+      padding: 22px;
+    }
+
+    .stat .number {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -.04em;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .timeline {
+      margin-top: 48px;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 17px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 56px;
+      margin-bottom: 42px;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 9px;
+      top: 8px;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 12%, transparent);
+    }
+
+    .timeline-date {
+      color: var(--accent);
+      font-size: .88rem;
+      margin-bottom: 7px;
+      font-weight: 700;
+    }
+
+    .timeline-item h3 {
+      font-size: 1.55rem;
+      margin-bottom: 9px;
+    }
+
+    .timeline-item p {
+      max-width: 780px;
+      color: var(--muted);
     }
 
     .tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 20px;
+      gap: 9px;
+      margin-top: 16px;
     }
 
     .tag {
-      padding: 7px 11px;
+      border: 1px solid var(--border);
+      padding: 7px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.08);
-      color: #b7bac3;
-      font-size: 0.85rem;
+      color: var(--muted);
+      font-size: .82rem;
+      background: var(--card);
     }
 
-    .contact-box {
-      padding: 45px;
-      border-radius: 28px;
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 44px;
+    }
+
+    .project {
+      border: 1px solid var(--border);
+      background: var(--card);
+      border-radius: 22px;
+      padding: 25px;
+      min-height: 260px;
+      position: relative;
+      overflow: hidden;
+      transition: transform .25s ease, border-color .25s ease;
+    }
+
+    .project:hover {
+      transform: translateY(-7px);
+      border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+    }
+
+    .project::after {
+      content: "";
+      position: absolute;
+      width: 160px;
+      height: 160px;
+      right: -60px;
+      bottom: -60px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: .07;
+      filter: blur(12px);
+    }
+
+    .project small {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      font-weight: 800;
+    }
+
+    .project h3 {
+      margin-top: 16px;
+      font-size: 1.45rem;
+    }
+
+    .project p {
+      margin-top: 12px;
+      color: var(--muted);
+    }
+
+    .contact {
+      border: 1px solid var(--border);
       background:
-        linear-gradient(135deg, rgba(126,167,255,0.14), rgba(102,224,255,0.06));
-      border: 1px solid rgba(255,255,255,0.08);
+        linear-gradient(140deg, color-mix(in srgb, var(--accent) 12%, transparent), transparent 40%),
+        var(--card);
+      padding: 42px;
+      border-radius: 28px;
+      box-shadow: var(--shadow);
     }
 
     footer {
-      padding: 40px 0 60px;
-      color: #70747e;
-      font-size: 0.9rem;
+      padding: 50px 0 70px;
+      color: var(--muted);
+      font-size: .9rem;
     }
 
-    @media (max-width: 850px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 45px;
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
       }
-
-      .cards {
-        grid-template-columns: 1fr;
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
+    }
 
-      .experience-row {
+    @media (max-width: 900px) {
+      .hero-grid,
+      .projects,
+      .stats {
         grid-template-columns: 1fr;
-        gap: 8px;
       }
 
       .nav-links {
         display: none;
       }
 
-      .profile-card {
-        min-height: 320px;
+      .profile {
+        min-height: 430px;
+      }
+
+      .profile-visual {
+        height: 270px;
       }
     }
   </style>
 </head>
 
 <body>
+  <div class="noise"></div>
+  <div class="orb one"></div>
+  <div class="orb two"></div>
 
   <nav>
     <div class="container nav-inner">
-      <div class="logo">MASAO DEPRÉ</div>
+      <div class="brand">MASAO DEPRÉ</div>
 
       <div class="nav-links">
         <a href="#about">About</a>
@@ -339,6 +556,8 @@
         <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
       </div>
+
+      <button class="theme-toggle" id="themeToggle">☼</button>
     </div>
   </nav>
 
@@ -348,141 +567,136 @@
       <div class="container hero-grid">
 
         <div>
-          <div class="eyebrow">
+          <div class="badge">
+            <span class="dot"></span>
             Engineering · Physics · Quantum Technologies
           </div>
 
           <h1>
             Masao
-            <span class="gradient-text">Dépré.</span>
+            <span class="gradient">Dépré.</span>
           </h1>
 
-          <p class="hero-text">
+          <p class="hero-copy">
             Engineering student interested in optics, photonics,
             quantum technologies and experimental physics.
-            I enjoy working at the intersection of science,
-            engineering and real-world experimentation.
+            I enjoy building, testing and understanding systems
+            where physics meets engineering.
           </p>
 
-          <div class="buttons">
-            <a class="btn btn-primary" href="#experience">
-              Explore my work
-            </a>
-
-            <a class="btn btn-secondary"
-               href="https://www.linkedin.com/"
-               target="_blank">
-              LinkedIn ↗
-            </a>
-
-            <a class="btn btn-secondary"
-               href="https://github.com/"
-               target="_blank">
-              GitHub ↗
-            </a>
+          <div class="cta-row">
+            <a class="btn primary" href="#projects">Explore my work ↓</a>
+            <a class="btn secondary" href="https://www.linkedin.com/" target="_blank">LinkedIn ↗</a>
+            <a class="btn secondary" href="https://github.com/" target="_blank">GitHub ↗</a>
           </div>
         </div>
 
-        <div class="profile-card">
-          <div class="profile-placeholder">
-            Add your photo here later
-            <br><br>
-            You can replace this block
-            with an &lt;img&gt;.
+        <div class="profile" id="profileCard">
+          <div class="profile-visual">
+            Add a portrait or laboratory photo here
           </div>
 
-          <strong>Based in France</strong>
-          <span style="color:#8f939d;">
-            Open to research & engineering opportunities
-          </span>
+          <div class="profile-meta">
+            <strong>Engineering & Experimental Physics</strong>
+            <span style="color:var(--muted)">
+              Optics · Photonics · Quantum systems
+            </span>
+          </div>
         </div>
 
       </div>
     </section>
 
     <section id="about">
-      <div class="container">
-        <div class="section-label">About</div>
+      <div class="container reveal">
+
+        <div class="section-kicker">About</div>
 
         <h2>
-          Physics, engineering
-          & experimentation.
+          Curious by design.
+          <br>
+          Experimental by nature.
         </h2>
 
-        <p class="section-intro">
-          I am an engineering student with a strong interest in
-          optics, photonics and quantum technologies.
-          My work combines theoretical understanding with
-          experimental systems, electronics, simulations
-          and data analysis.
+        <p class="section-copy">
+          My interests span optical engineering, quantum physics,
+          experimental electronics and data analysis. I particularly enjoy
+          projects that combine theoretical understanding with real hardware,
+          measurement systems and iterative experimentation.
         </p>
 
-        <div class="tags">
-          <span class="tag">Photonics</span>
-          <span class="tag">Quantum physics</span>
-          <span class="tag">Optics</span>
-          <span class="tag">Experimental physics</span>
-          <span class="tag">Python</span>
-          <span class="tag">Electronics</span>
-          <span class="tag">Data analysis</span>
+        <div class="stats">
+          <div class="stat">
+            <div class="number">Optics</div>
+            <span>Photonics & optical systems</span>
+          </div>
+
+          <div class="stat">
+            <div class="number">Quantum</div>
+            <span>Superconducting systems</span>
+          </div>
+
+          <div class="stat">
+            <div class="number">Python</div>
+            <span>Data analysis & automation</span>
+          </div>
+
+          <div class="stat">
+            <div class="number">Hardware</div>
+            <span>Electronics & experiments</span>
+          </div>
         </div>
 
       </div>
     </section>
 
     <section id="experience">
-      <div class="container">
-        <div class="section-label">Experience</div>
+      <div class="container reveal">
 
-        <h2>Selected experience.</h2>
+        <div class="section-kicker">Experience</div>
 
-        <div class="experience">
+        <h2>Selected journey.</h2>
 
-          <div class="experience-row">
-            <div class="experience-date">
-              2026
-            </div>
+        <div class="timeline">
 
-            <div>
-              <h3>
-                Research Internship — RIKEN
-              </h3>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
 
-              <p>
-                Research internship focused on superconducting
-                quantum systems, optical and microwave control,
-                qubit characterization and experimental electronics.
-              </p>
+            <div class="timeline-date">2026</div>
 
-              <div class="tags">
-                <span class="tag">Quantum computing</span>
-                <span class="tag">Superconducting qubits</span>
-                <span class="tag">Microwave control</span>
-                <span class="tag">Photonics</span>
-              </div>
+            <h3>Research Internship — RIKEN</h3>
+
+            <p>
+              Research internship focused on superconducting qubits,
+              optical and microwave control, coherence measurements,
+              electronics and experimental system integration.
+            </p>
+
+            <div class="tags">
+              <span class="tag">Quantum computing</span>
+              <span class="tag">Superconducting qubits</span>
+              <span class="tag">T1 / T2</span>
+              <span class="tag">Microwave control</span>
+              <span class="tag">Photonics</span>
             </div>
           </div>
 
-          <div class="experience-row">
-            <div class="experience-date">
-              Engineering studies
-            </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
 
-            <div>
-              <h3>
-                Institut d'Optique Graduate School
-              </h3>
+            <div class="timeline-date">Engineering studies</div>
 
-              <p>
-                Engineering curriculum focused on optics,
-                photonics, physics and advanced optical systems.
-              </p>
+            <h3>Institut d'Optique Graduate School</h3>
 
-              <div class="tags">
-                <span class="tag">Optical engineering</span>
-                <span class="tag">Photonics</span>
-                <span class="tag">Physics</span>
-              </div>
+            <p>
+              Engineering curriculum focused on optical engineering,
+              photonics, physics and advanced scientific instrumentation.
+            </p>
+
+            <div class="tags">
+              <span class="tag">Optical engineering</span>
+              <span class="tag">Photonics</span>
+              <span class="tag">Physics</span>
             </div>
           </div>
 
@@ -491,99 +705,70 @@
     </section>
 
     <section id="projects">
-      <div class="container">
-        <div class="section-label">Projects</div>
+      <div class="container reveal">
 
-        <h2>Things I've worked on.</h2>
+        <div class="section-kicker">Projects</div>
 
-        <p class="section-intro">
-          A selection of technical and scientific projects.
-          You can progressively replace these examples with
-          your own projects, figures and GitHub repositories.
+        <h2>Selected work.</h2>
+
+        <p class="section-copy">
+          A few examples of technical projects spanning quantum experiments,
+          electronics and photonics.
         </p>
 
-        <div class="cards">
+        <div class="projects">
 
-          <div class="card">
-            <div class="small">Quantum systems</div>
-
-            <h3>
-              Qubit characterization
-            </h3>
-
+          <article class="project">
+            <small>Quantum systems</small>
+            <h3>Qubit characterization</h3>
             <p>
-              Experimental characterization using spectroscopy,
-              Rabi oscillations, T1 measurements, Ramsey experiments
-              and spin-echo techniques.
+              Spectroscopy, Rabi oscillations, T1 measurements,
+              Ramsey experiments and spin-echo characterization.
             </p>
-          </div>
+          </article>
 
-          <div class="card">
-            <div class="small">Electronics</div>
-
-            <h3>
-              TTL signal merger
-            </h3>
-
+          <article class="project">
+            <small>Electronics</small>
+            <h3>TTL signal merger</h3>
             <p>
-              Simulation and optimization of high-speed digital
-              signal paths, impedance matching and ringing reduction
-              using LTspice.
+              LTspice simulation of high-speed digital signal paths,
+              impedance matching and ringing reduction.
             </p>
-          </div>
+          </article>
 
-          <div class="card">
-            <div class="small">Photonics</div>
-
-            <h3>
-              Optical control systems
-            </h3>
-
+          <article class="project">
+            <small>Photonics</small>
+            <h3>Optical control systems</h3>
             <p>
-              Work on optical signal delivery, photodiodes,
+              Work on optical delivery, photodiodes,
               cryogenic integration and optical control architectures.
             </p>
-          </div>
+          </article>
 
         </div>
       </div>
     </section>
 
     <section id="contact">
-      <div class="container">
+      <div class="container reveal">
 
-        <div class="contact-box">
-          <div class="section-label">Contact</div>
+        <div class="contact">
+          <div class="section-kicker">Contact</div>
 
-          <h2>Let's connect.</h2>
+          <h2>Let's build something interesting.</h2>
 
-          <p class="section-intro">
+          <p class="section-copy">
             Feel free to reach out regarding research,
             engineering projects, internships or collaborations.
           </p>
 
-          <div class="buttons">
-            <a
-              class="btn btn-primary"
-              href="mailto:your.email@example.com"
-            >
+          <div class="cta-row">
+            <a class="btn primary" href="mailto:your.email@example.com">
               Email me
             </a>
 
-            <a
-              class="btn btn-secondary"
-              href="https://www.linkedin.com/"
-              target="_blank"
-            >
+            <a class="btn secondary" href="https://www.linkedin.com/" target="_blank">
               LinkedIn ↗
-            </a>
-
-            <a
-              class="btn btn-secondary"
-              href="https://github.com/"
-              target="_blank"
-            >
-              GitHub ↗
             </a>
           </div>
         </div>
@@ -598,6 +783,48 @@
       © 2026 Masao Dépré
     </div>
   </footer>
+
+  <script>
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealElements.forEach(el => observer.observe(el));
+
+    const themeToggle = document.getElementById('themeToggle');
+
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+      themeToggle.textContent =
+        document.body.classList.contains('light') ? '☾' : '☼';
+    });
+
+    const card = document.getElementById('profileCard');
+
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const rotateY = ((x / rect.width) - 0.5) * 10;
+      const rotateX = ((y / rect.height) - 0.5) * -10;
+
+      card.style.transform =
+        `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform =
+        'perspective(900px) rotateX(0deg) rotateY(0deg)';
+    });
+  </script>
 
 </body>
 </html>
