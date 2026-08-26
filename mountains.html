@@ -17,6 +17,7 @@
       --text: #f5f7fb;
       --muted: #9da3b4;
       --accent: #78a7ff;
+      --accent-2: #70f0d0;
       --card: rgba(255,255,255,0.055);
       --border: rgba(255,255,255,0.09);
       --shadow: 0 25px 80px rgba(0,0,0,.35);
@@ -50,6 +51,33 @@
       width: min(1160px, 90%);
       margin: auto;
     }
+
+    /* BACKGROUND */
+
+    .orb {
+      position: fixed;
+      width: 450px;
+      height: 450px;
+      border-radius: 50%;
+      filter: blur(110px);
+      opacity: .13;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .orb.one {
+      top: -100px;
+      right: -100px;
+      background: var(--accent);
+    }
+
+    .orb.two {
+      bottom: 0;
+      left: -150px;
+      background: var(--accent-2);
+    }
+
+    /* NAV */
 
     nav {
       position: fixed;
@@ -85,26 +113,14 @@
       color: var(--text);
     }
 
+    /* HERO */
+
     .hero {
-      min-height: 90vh;
+      min-height: 85vh;
       display: flex;
       align-items: flex-end;
-      padding: 140px 0 80px;
+      padding: 140px 0 90px;
       position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
-      background: var(--accent);
-      filter: blur(120px);
-      opacity: .14;
-      top: 0;
-      right: -150px;
     }
 
     .kicker {
@@ -118,9 +134,20 @@
 
     h1 {
       font-size: clamp(4rem, 10vw, 8rem);
-      line-height: .9;
+      line-height: .88;
       letter-spacing: -.07em;
       max-width: 950px;
+    }
+
+    .gradient {
+      background: linear-gradient(
+        90deg,
+        var(--text),
+        var(--accent),
+        var(--accent-2)
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .hero-copy {
@@ -136,6 +163,8 @@
       font-size: .85rem;
     }
 
+    /* GALLERY */
+
     section {
       padding: 90px 0;
     }
@@ -144,7 +173,7 @@
       font-size: clamp(2.5rem, 6vw, 5rem);
       line-height: .95;
       letter-spacing: -.05em;
-      margin-bottom: 35px;
+      margin-bottom: 40px;
     }
 
     .gallery {
@@ -159,7 +188,6 @@
       border-radius: 22px;
       border: 1px solid var(--border);
       background: var(--card);
-      min-height: 320px;
       cursor: pointer;
       box-shadow: var(--shadow);
     }
@@ -169,67 +197,92 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform .5s ease, filter .4s ease;
+
+      transition:
+        transform .55s cubic-bezier(.2,.8,.2,1),
+        filter .4s ease;
     }
 
     .photo:hover img {
-      transform: scale(1.035);
-      filter: brightness(.86);
+      transform: scale(1.045);
+      filter: brightness(.82);
     }
+
+    /* First row */
 
     .photo.large {
       grid-column: span 8;
-      min-height: 520px;
+      height: 520px;
     }
 
     .photo.tall {
       grid-column: span 4;
-      min-height: 520px;
+      height: 520px;
     }
+
+    /* Second row */
 
     .photo.medium {
       grid-column: span 6;
-      min-height: 360px;
+      height: 380px;
     }
 
+    /* Third row */
+
     .photo.small {
-      grid-column: span 4;
-      min-height: 300px;
+      grid-column: span 6;
+      height: 380px;
     }
+
+    /* CAPTIONS */
 
     .caption {
       position: absolute;
       left: 18px;
       bottom: 16px;
+
       padding: 8px 12px;
+
       border-radius: 999px;
+
       background: rgba(0,0,0,.48);
       backdrop-filter: blur(10px);
+
       color: white;
+
       font-size: .82rem;
-      opacity: .85;
+
+      opacity: .8;
+
+      transition:
+        opacity .3s ease,
+        transform .3s ease;
     }
 
-    .placeholder {
-      width: 100%;
-      height: 100%;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      color: var(--muted);
-      padding: 30px;
-      background:
-        radial-gradient(circle at 30% 30%, rgba(120,167,255,.22), transparent 30%),
-        radial-gradient(circle at 70% 70%, rgba(112,240,208,.12), transparent 35%),
-        #10131a;
+    .photo:hover .caption {
+      opacity: 1;
+      transform: translateY(-3px);
     }
+
+    /* STORY */
 
     .story {
-      margin-top: 80px;
+      margin-top: 100px;
+
+      padding-top: 70px;
+
+      border-top: 1px solid var(--border);
+
       display: grid;
       grid-template-columns: .8fr 1.2fr;
+
       gap: 50px;
       align-items: start;
+    }
+
+    .story-title {
+      font-size: 2rem;
+      letter-spacing: -.04em;
     }
 
     .story p {
@@ -237,6 +290,50 @@
       font-size: 1.05rem;
       max-width: 720px;
     }
+
+    /* BACK BUTTON */
+
+    .return-area {
+      margin-top: 100px;
+      padding: 45px;
+
+      border: 1px solid var(--border);
+      border-radius: 24px;
+
+      background: var(--card);
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 20px;
+    }
+
+    .return-area h3 {
+      font-size: 1.5rem;
+    }
+
+    .return-button {
+      padding: 12px 18px;
+
+      border: 1px solid var(--border);
+      border-radius: 12px;
+
+      color: var(--muted);
+
+      transition:
+        transform .2s ease,
+        color .2s ease,
+        border-color .2s ease;
+    }
+
+    .return-button:hover {
+      transform: translateX(-4px);
+      color: var(--text);
+      border-color: var(--accent);
+    }
+
+    /* FOOTER */
 
     footer {
       padding: 60px 0 80px;
@@ -249,78 +346,165 @@
     .lightbox {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.92);
-      display: none;
+
+      background: rgba(0,0,0,.94);
+
+      display: flex;
       align-items: center;
       justify-content: center;
+
       z-index: 100;
-      padding: 30px;
+
+      padding: 35px;
+
+      opacity: 0;
+      visibility: hidden;
+
+      transition:
+        opacity .25s ease,
+        visibility .25s ease;
+
+      cursor: zoom-out;
     }
 
     .lightbox.active {
-      display: flex;
+      opacity: 1;
+      visibility: visible;
     }
 
     .lightbox img {
-      max-width: 95vw;
+      max-width: 94vw;
       max-height: 90vh;
+
       object-fit: contain;
+
       border-radius: 14px;
-      box-shadow: 0 30px 100px rgba(0,0,0,.5);
+
+      transform: scale(.96);
+
+      transition: transform .3s ease;
+
+      box-shadow: 0 30px 100px rgba(0,0,0,.7);
+    }
+
+    .lightbox.active img {
+      transform: scale(1);
     }
 
     .close {
       position: fixed;
-      top: 25px;
+      top: 22px;
       right: 30px;
+
       color: white;
-      font-size: 2rem;
+
+      font-size: 2.3rem;
+      line-height: 1;
+
       cursor: pointer;
-      opacity: .8;
+
+      opacity: .7;
+
+      transition: opacity .2s ease;
     }
 
     .close:hover {
       opacity: 1;
     }
 
+    /* SCROLL ANIMATION */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+
+      transition:
+        opacity .7s ease,
+        transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* MOBILE */
+
     @media (max-width: 850px) {
+
       .photo.large,
       .photo.tall,
       .photo.medium,
       .photo.small {
         grid-column: span 12;
-        min-height: 340px;
+        height: 360px;
       }
 
       .story {
         grid-template-columns: 1fr;
       }
 
+      .return-area {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
       .hero {
-        min-height: 75vh;
+        min-height: 70vh;
+      }
+
+      h1 {
+        font-size: clamp(4rem, 18vw, 6rem);
       }
     }
   </style>
 </head>
 
+
 <body>
 
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+
+
+  <!-- NAV -->
+
   <nav>
+
     <div class="container nav-inner">
-      <div class="brand">MASAO DEPRÉ</div>
-      <a class="back" href="index.html#interests">← Back to portfolio</a>
+
+      <div class="brand">
+        MASAO DEPRÉ
+      </div>
+
+      <a
+        class="back"
+        href="index.html#interests"
+      >
+        ← Back to portfolio
+      </a>
+
     </div>
+
   </nav>
+
 
   <main>
 
+
+    <!-- HERO -->
+
     <section class="hero">
+
       <div class="container">
-        <div class="kicker">Mountains & Trail</div>
+
+        <div class="kicker">
+          Mountains · Trail · Hiking
+        </div>
 
         <h1>
           Chasing
-          summits.
+          <span class="gradient">summits.</span>
         </h1>
 
         <p class="hero-copy">
@@ -331,125 +515,321 @@
         <div class="scroll-hint">
           Scroll to explore ↓
         </div>
+
       </div>
+
     </section>
 
-    <section>
-      <div class="container">
 
-        <div class="kicker">Gallery</div>
+    <!-- PHOTOS -->
+
+    <section>
+
+      <div class="container reveal">
+
+        <div class="kicker">
+          Gallery
+        </div>
 
         <h2 class="section-title">
           A few moments.
         </h2>
 
+
         <div class="gallery">
 
-          <div class="photo large" onclick="openLightbox(this)">
-            <div class="placeholder">
-              Add your main mountain photo here
-            </div>
-            <span class="caption">Mountains</span>
+
+          <!-- PHOTO 1 -->
+
+          <div
+            class="photo large"
+            onclick="openLightbox(this)"
+          >
+
+            <img
+              src="mountain1.jpg"
+              alt="Mountain adventure"
+            >
+
+            <span class="caption">
+              Mountains
+            </span>
+
           </div>
 
-          <div class="photo tall" onclick="openLightbox(this)">
-            <div class="placeholder">
-              Add a vertical trail photo here
-            </div>
-            <span class="caption">Trail</span>
+
+          <!-- PHOTO 2 -->
+
+          <div
+            class="photo tall"
+            onclick="openLightbox(this)"
+          >
+
+            <img
+              src="mountain2.jpg"
+              alt="Mountain trail"
+            >
+
+            <span class="caption">
+              Trail
+            </span>
+
           </div>
 
-          <div class="photo medium" onclick="openLightbox(this)">
-            <div class="placeholder">
-              Add another hiking photo here
-            </div>
-            <span class="caption">Hiking</span>
+
+          <!-- PHOTO 3 -->
+
+          <div
+            class="photo medium"
+            onclick="openLightbox(this)"
+          >
+
+            <img
+              src="mountain3.jpg"
+              alt="Hiking in the mountains"
+            >
+
+            <span class="caption">
+              Hiking
+            </span>
+
           </div>
 
-          <div class="photo medium" onclick="openLightbox(this)">
-            <div class="placeholder">
-              Add another summit photo here
-            </div>
-            <span class="caption">Summit</span>
+
+          <!-- PHOTO 4 -->
+
+          <div
+            class="photo medium"
+            onclick="openLightbox(this)"
+          >
+
+            <img
+              src="mountain4.jpg"
+              alt="Mountain summit"
+            >
+
+            <span class="caption">
+              Summit
+            </span>
+
           </div>
 
-          <div class="photo small" onclick="openLightbox(this)">
-            <div class="placeholder">
-              Photo
-            </div>
+
+          <!-- PHOTO 5 -->
+
+          <div
+            class="photo small"
+            onclick="openLightbox(this)"
+          >
+
+            <img
+              src="mountain5.jpg"
+              alt="Mountain landscape"
+            >
+
           </div>
 
-          <div class="photo small" onclick="openLightbox(this)">
-            <div class="placeholder">
-              Photo
-            </div>
+
+          <!-- PHOTO 6 -->
+
+          <div
+            class="photo small"
+            onclick="openLightbox(this)"
+          >
+
+            <img
+              src="mountain6.jpg"
+              alt="Mountain adventure"
+            >
+
           </div>
 
-          <div class="photo small" onclick="openLightbox(this)">
-            <div class="placeholder">
-              Photo
-            </div>
-          </div>
 
         </div>
+
+
+        <!-- STORY -->
 
         <div class="story">
 
           <div>
-            <div class="kicker">Why mountains?</div>
+
+            <div class="kicker">
+              Beyond engineering
+            </div>
+
+            <h3 class="story-title">
+              Why mountains?
+            </h3>
+
           </div>
 
+
           <div>
+
             <p>
               Mountains are where I like to disconnect from engineering,
-              spend time outside and push myself physically. Trail running,
-              hiking and long climbs combine endurance, exploration and the
-              feeling of reaching somewhere that took real effort to get to.
+              spend time outside and push myself physically.
+              Trail running, hiking and long climbs combine endurance,
+              exploration and the feeling of reaching somewhere that
+              took real effort to get to.
             </p>
+
           </div>
 
         </div>
 
+
+        <!-- RETURN -->
+
+        <div class="return-area">
+
+          <div>
+
+            <div class="kicker">
+              Portfolio
+            </div>
+
+            <h3>
+              Back to my main page.
+            </h3>
+
+          </div>
+
+          <a
+            href="index.html#interests"
+            class="return-button"
+          >
+            ← Back to portfolio
+          </a>
+
+        </div>
+
+
       </div>
+
     </section>
 
   </main>
 
+
+  <!-- FOOTER -->
+
   <footer>
+
     <div class="container">
       © 2026 Masao Dépré · Mountains & Trail
     </div>
+
   </footer>
 
-  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-    <span class="close">×</span>
-    <img id="lightboxImage" src="" alt="">
+
+  <!-- IMAGE LIGHTBOX -->
+
+  <div
+    class="lightbox"
+    id="lightbox"
+    onclick="closeLightbox()"
+  >
+
+    <span class="close">
+      ×
+    </span>
+
+    <img
+      id="lightboxImage"
+      src=""
+      alt="Expanded photograph"
+    >
+
   </div>
 
+
   <script>
+
+    /* PHOTO LIGHTBOX */
+
     function openLightbox(element) {
-      const img = element.querySelector('img');
+
+      const img =
+        element.querySelector('img');
 
       if (!img) {
         return;
       }
 
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImage = document.getElementById('lightboxImage');
+      const lightbox =
+        document.getElementById('lightbox');
 
-      lightboxImage.src = img.src;
+      const lightboxImage =
+        document.getElementById('lightboxImage');
+
+      lightboxImage.src =
+        img.src;
+
+      lightboxImage.alt =
+        img.alt;
+
       lightbox.classList.add('active');
+
+      document.body.style.overflow =
+        'hidden';
+
     }
+
 
     function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('active');
+
+      const lightbox =
+        document.getElementById('lightbox');
+
+      lightbox.classList.remove('active');
+
+      document.body.style.overflow =
+        '';
+
     }
 
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'Escape') {
-        closeLightbox();
+
+    document.addEventListener(
+      'keydown',
+      function(event) {
+
+        if (event.key === 'Escape') {
+          closeLightbox();
+        }
+
       }
+    );
+
+
+    /* SCROLL ANIMATION */
+
+    const revealElements =
+      document.querySelectorAll('.reveal');
+
+    const observer =
+      new IntersectionObserver(
+        entries => {
+
+          entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.1
+        }
+      );
+
+    revealElements.forEach(el => {
+      observer.observe(el);
     });
+
   </script>
 
 </body>
