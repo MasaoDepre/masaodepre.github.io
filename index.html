@@ -4,11 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Masao Dépré — Engineering & Quantum Technologies</title>
+  <title>Masao Dépré — Optics, Photonics & Quantum Engineering</title>
+
   <meta
     name="description"
-    content="Personal website of Masao Dépré, engineering student working on optics, photonics, quantum technologies and experimental physics."
+    content="Masao Dépré — Engineering student at Institut d'Optique Graduate School working on optics, photonics, semiconductors, quantum technologies and scientific computing."
   />
+
+  <meta name="author" content="Masao Dépré" />
 
   <style>
     :root {
@@ -46,7 +49,8 @@
     }
 
     body {
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+                   BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
@@ -65,7 +69,8 @@
       pointer-events: none;
       opacity: .035;
       z-index: 20;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
     }
 
     .orb {
@@ -171,7 +176,6 @@
       display: flex;
       align-items: center;
       padding-top: 110px;
-      position: relative;
     }
 
     .hero-grid {
@@ -257,32 +261,20 @@
     }
 
     .profile {
-      position: relative;
       min-height: 520px;
       border: 1px solid var(--border);
       border-radius: 30px;
       background:
-        linear-gradient(145deg, color-mix(in srgb, var(--accent) 16%, transparent), transparent 45%),
+        linear-gradient(
+          145deg,
+          color-mix(in srgb, var(--accent) 16%, transparent),
+          transparent 45%
+        ),
         var(--card);
       box-shadow: var(--shadow);
       padding: 26px;
       overflow: hidden;
-      transform-style: preserve-3d;
       transition: transform .2s ease;
-    }
-
-    .profile::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.09), transparent 65%);
-      transform: translateX(-100%);
-      animation: shine 5s infinite;
-    }
-
-    @keyframes shine {
-      0%, 70% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
     }
 
     .profile-visual {
@@ -290,25 +282,28 @@
       border-radius: 22px;
       border: 1px solid var(--border);
       background:
-        radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--accent) 55%, transparent), transparent 35%),
-        radial-gradient(circle at 70% 70%, color-mix(in srgb, var(--accent-2) 45%, transparent), transparent 40%),
+        radial-gradient(
+          circle at 30% 30%,
+          color-mix(in srgb, var(--accent) 55%, transparent),
+          transparent 35%
+        ),
+        radial-gradient(
+          circle at 70% 70%,
+          color-mix(in srgb, var(--accent-2) 45%, transparent),
+          transparent 40%
+        ),
         var(--bg-soft);
       display: grid;
       place-items: center;
       color: var(--muted);
       text-align: center;
-      padding: 20px;
+      padding: 30px;
       margin-bottom: 24px;
     }
 
-    .profile-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .profile-meta strong {
-      font-size: 1.2rem;
+    .profile-symbol {
+      font-size: 4rem;
+      margin-bottom: 15px;
     }
 
     section {
@@ -332,7 +327,7 @@
     }
 
     .section-copy {
-      max-width: 760px;
+      max-width: 780px;
       color: var(--muted);
       font-size: 1.07rem;
     }
@@ -348,29 +343,38 @@
       transform: translateY(0);
     }
 
-    .stats {
-      margin-top: 45px;
+    .skills-grid,
+    .projects {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 44px;
     }
 
-    .stat {
+    .skill-card,
+    .project {
       border: 1px solid var(--border);
-      border-radius: 18px;
       background: var(--card);
-      padding: 22px;
+      border-radius: 22px;
+      padding: 25px;
+      transition: transform .25s ease, border-color .25s ease;
     }
 
-    .stat .number {
-      font-size: 2rem;
-      font-weight: 800;
-      letter-spacing: -.04em;
+    .skill-card:hover,
+    .project:hover {
+      transform: translateY(-7px);
+      border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
     }
 
-    .stat span {
+    .skill-card h3,
+    .project h3 {
+      margin-bottom: 10px;
+      font-size: 1.35rem;
+    }
+
+    .skill-card p,
+    .project p {
       color: var(--muted);
-      font-size: .9rem;
     }
 
     .timeline {
@@ -391,7 +395,7 @@
     .timeline-item {
       position: relative;
       padding-left: 56px;
-      margin-bottom: 42px;
+      margin-bottom: 48px;
     }
 
     .timeline-dot {
@@ -403,7 +407,6 @@
       border-radius: 50%;
       background: var(--bg);
       border: 3px solid var(--accent);
-      box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 12%, transparent);
     }
 
     .timeline-date {
@@ -415,11 +418,18 @@
 
     .timeline-item h3 {
       font-size: 1.55rem;
-      margin-bottom: 9px;
+      margin-bottom: 5px;
+    }
+
+    .place {
+      color: var(--text);
+      opacity: .75;
+      margin-bottom: 10px;
+      font-weight: 600;
     }
 
     .timeline-item p {
-      max-width: 780px;
+      max-width: 800px;
       color: var(--muted);
     }
 
@@ -439,40 +449,62 @@
       background: var(--card);
     }
 
-    .projects {
+    .featured {
+      margin-top: 50px;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 34px;
+      background:
+        linear-gradient(
+          140deg,
+          color-mix(in srgb, var(--accent) 16%, transparent),
+          transparent 45%
+        ),
+        var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .featured-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 44px;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 35px;
+      align-items: start;
+    }
+
+    .featured h3 {
+      font-size: 2rem;
+      margin: 8px 0 10px;
+    }
+
+    .featured p {
+      color: var(--muted);
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .mini-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      background: var(--card);
+    }
+
+    .mini-card strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .mini-card span {
+      color: var(--muted);
+      font-size: .88rem;
     }
 
     .project {
-      border: 1px solid var(--border);
-      background: var(--card);
-      border-radius: 22px;
-      padding: 25px;
-      min-height: 260px;
-      position: relative;
-      overflow: hidden;
-      transition: transform .25s ease, border-color .25s ease;
-    }
-
-    .project:hover {
-      transform: translateY(-7px);
-      border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
-    }
-
-    .project::after {
-      content: "";
-      position: absolute;
-      width: 160px;
-      height: 160px;
-      right: -60px;
-      bottom: -60px;
-      border-radius: 50%;
-      background: var(--accent);
-      opacity: .07;
-      filter: blur(12px);
+      min-height: 220px;
     }
 
     .project small {
@@ -484,18 +516,40 @@
 
     .project h3 {
       margin-top: 16px;
-      font-size: 1.45rem;
     }
 
-    .project p {
-      margin-top: 12px;
+    .languages {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 35px;
+    }
+
+    .language {
+      padding: 18px 24px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: var(--card);
+    }
+
+    .language strong {
+      display: block;
+      font-size: 1.15rem;
+    }
+
+    .language span {
       color: var(--muted);
+      font-size: .9rem;
     }
 
     .contact {
       border: 1px solid var(--border);
       background:
-        linear-gradient(140deg, color-mix(in srgb, var(--accent) 12%, transparent), transparent 40%),
+        linear-gradient(
+          140deg,
+          color-mix(in srgb, var(--accent) 12%, transparent),
+          transparent 40%
+        ),
         var(--card);
       padding: 42px;
       border-radius: 28px;
@@ -521,27 +575,25 @@
 
     @media (max-width: 900px) {
       .hero-grid,
+      .skills-grid,
       .projects,
-      .stats {
+      .featured-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .mini-grid {
         grid-template-columns: 1fr;
       }
 
       .nav-links {
         display: none;
       }
-
-      .profile {
-        min-height: 430px;
-      }
-
-      .profile-visual {
-        height: 270px;
-      }
     }
   </style>
 </head>
 
 <body>
+
   <div class="noise"></div>
   <div class="orb one"></div>
   <div class="orb two"></div>
@@ -553,7 +605,8 @@
       <div class="nav-links">
         <a href="#about">About</a>
         <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
       </div>
 
@@ -569,7 +622,7 @@
         <div>
           <div class="badge">
             <span class="dot"></span>
-            Engineering · Physics · Quantum Technologies
+            Optics · Photonics · Quantum Technologies
           </div>
 
           <h1>
@@ -578,199 +631,525 @@
           </h1>
 
           <p class="hero-copy">
-            Engineering student interested in optics, photonics,
-            quantum technologies and experimental physics.
-            I enjoy building, testing and understanding systems
-            where physics meets engineering.
+            Engineering student at Institut d'Optique Graduate School,
+            specializing in optics, photonics and semiconductor physics,
+            with experience in quantum technologies, experimental physics
+            and scientific computing.
           </p>
 
           <div class="cta-row">
-            <a class="btn primary" href="#projects">Explore my work ↓</a>
-            <a class="btn secondary" href="https://www.linkedin.com/" target="_blank">LinkedIn ↗</a>
-            <a class="btn secondary" href="https://github.com/" target="_blank">GitHub ↗</a>
+            <a class="btn primary" href="#experience">
+              Explore my work ↓
+            </a>
+
+            <a
+              class="btn secondary"
+              href="https://www.linkedin.com/in/masao-depre-58bb96230/"
+              target="_blank"
+            >
+              LinkedIn ↗
+            </a>
+
+            <a
+              class="btn secondary"
+              href="mailto:depre.masao@gmail.com"
+            >
+              Email
+            </a>
           </div>
         </div>
 
         <div class="profile" id="profileCard">
+
           <div class="profile-visual">
-            Add a portrait or laboratory photo here
+            <div>
+              <div class="profile-symbol">◉</div>
+
+              <strong>
+                Optics × Quantum × Engineering
+              </strong>
+
+              <p style="margin-top:10px;">
+                Experimental systems, photonics,
+                scientific computing and advanced instrumentation.
+              </p>
+            </div>
           </div>
 
-          <div class="profile-meta">
-            <strong>Engineering & Experimental Physics</strong>
-            <span style="color:var(--muted)">
-              Optics · Photonics · Quantum systems
-            </span>
-          </div>
+          <strong style="font-size:1.2rem;">
+            Institut d'Optique Graduate School
+          </strong>
+
+          <p style="color:var(--muted);">
+            Université Paris-Saclay · France
+          </p>
+
         </div>
 
       </div>
     </section>
+
 
     <section id="about">
       <div class="container reveal">
 
-        <div class="section-kicker">About</div>
+        <div class="section-kicker">About me</div>
 
         <h2>
-          Curious by design.
-          <br>
-          Experimental by nature.
+          Science with an
+          experimental mindset.
         </h2>
 
         <p class="section-copy">
-          My interests span optical engineering, quantum physics,
-          experimental electronics and data analysis. I particularly enjoy
-          projects that combine theoretical understanding with real hardware,
-          measurement systems and iterative experimentation.
+          My academic background combines intensive training in
+          mathematics and physics with engineering studies in optics
+          and photonics.
+          <br><br>
+          I am particularly interested in optical engineering,
+          semiconductor physics, quantum technologies, scientific
+          computing and experimental systems. I enjoy understanding
+          complex physical systems and translating that understanding
+          into real measurements, simulations and hardware.
+          <br><br>
+          Having lived in Japan, Singapore and France, I also enjoy
+          working in international and multicultural environments.
         </p>
-
-        <div class="stats">
-          <div class="stat">
-            <div class="number">Optics</div>
-            <span>Photonics & optical systems</span>
-          </div>
-
-          <div class="stat">
-            <div class="number">Quantum</div>
-            <span>Superconducting systems</span>
-          </div>
-
-          <div class="stat">
-            <div class="number">Python</div>
-            <span>Data analysis & automation</span>
-          </div>
-
-          <div class="stat">
-            <div class="number">Hardware</div>
-            <span>Electronics & experiments</span>
-          </div>
-        </div>
 
       </div>
     </section>
+
 
     <section id="experience">
       <div class="container reveal">
 
         <div class="section-kicker">Experience</div>
 
-        <h2>Selected journey.</h2>
+        <h2>What I've worked on.</h2>
+
+        <div class="featured">
+
+          <div class="featured-grid">
+
+            <div>
+              <div class="section-kicker">
+                2026 · Featured experience
+              </div>
+
+              <h3>
+                Research Internship — RIKEN
+              </h3>
+
+              <div class="place">
+                Superconducting Quantum Electronics Laboratory · Japan
+              </div>
+
+              <p>
+                Research internship focused on experimental
+                superconducting quantum systems and the integration
+                of optical control techniques with qubit experiments.
+                Worked on qubit characterization, optical and microwave
+                control, coherence measurements, electronics simulation
+                and experimental hardware integration.
+              </p>
+
+              <div class="tags">
+                <span class="tag">Superconducting qubits</span>
+                <span class="tag">Quantum computing</span>
+                <span class="tag">Photonics</span>
+                <span class="tag">Microwave control</span>
+                <span class="tag">Python</span>
+                <span class="tag">LTspice</span>
+              </div>
+            </div>
+
+            <div class="mini-grid">
+
+              <div class="mini-card">
+                <strong>Qubit characterization</strong>
+                <span>
+                  Spectroscopy, Rabi oscillations,
+                  T1, Ramsey and spin-echo measurements.
+                </span>
+              </div>
+
+              <div class="mini-card">
+                <strong>Coherence analysis</strong>
+                <span>
+                  Comparison of T1 and T2 echo under
+                  optical and microwave control.
+                </span>
+              </div>
+
+              <div class="mini-card">
+                <strong>Optical control</strong>
+                <span>
+                  Integration of optical signal delivery
+                  and photodiodes into cryogenic experiments.
+                </span>
+              </div>
+
+              <div class="mini-card">
+                <strong>Experimental electronics</strong>
+                <span>
+                  TTL merger simulation, impedance matching
+                  and ringing reduction using LTspice.
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
 
         <div class="timeline">
 
           <div class="timeline-item">
             <div class="timeline-dot"></div>
 
-            <div class="timeline-date">2026</div>
+            <div class="timeline-date">
+              JUNE 2025 — AUGUST 2025
+            </div>
 
-            <h3>Research Internship — RIKEN</h3>
+            <h3>
+              Data Analysis Internship
+            </h3>
+
+            <div class="place">
+              CEA-Leti · Grenoble
+            </div>
 
             <p>
-              Research internship focused on superconducting qubits,
-              optical and microwave control, coherence measurements,
-              electronics and experimental system integration.
+              Worked on the 193 nm Immersion Scanner Project.
+              Developed a machine-data analyzer to process and
+              visualize scanner performance metrics, contributed
+              to data automation pipelines and improved diagnostic
+              accuracy.
             </p>
 
             <div class="tags">
-              <span class="tag">Quantum computing</span>
-              <span class="tag">Superconducting qubits</span>
-              <span class="tag">T1 / T2</span>
-              <span class="tag">Microwave control</span>
-              <span class="tag">Photonics</span>
+              <span class="tag">Python</span>
+              <span class="tag">Data analysis</span>
+              <span class="tag">Semiconductors</span>
+              <span class="tag">Automation</span>
             </div>
           </div>
+
 
           <div class="timeline-item">
             <div class="timeline-dot"></div>
 
-            <div class="timeline-date">Engineering studies</div>
+            <div class="timeline-date">
+              SEPTEMBER 2024 — JUNE 2025
+            </div>
 
-            <h3>Institut d'Optique Graduate School</h3>
+            <h3>
+              Volunteer Mathematics Tutor
+            </h3>
+
+            <div class="place">
+              ZUPdeCO · Palaiseau
+            </div>
 
             <p>
-              Engineering curriculum focused on optical engineering,
-              photonics, physics and advanced scientific instrumentation.
+              Provided academic support in mathematics
+              to children facing difficulties.
+            </p>
+          </div>
+
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-date">
+              SEPTEMBER 2018 — JUNE 2022
+            </div>
+
+            <h3>
+              Basketball Referee & Coach
+            </h3>
+
+            <div class="place">
+              LTMB · Grenoble
+            </div>
+
+            <p>
+              Refereed basketball games for local competitions
+              and coached a youth team for several seasons.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <section id="education">
+      <div class="container reveal">
+
+        <div class="section-kicker">Education</div>
+
+        <h2>Academic journey.</h2>
+
+        <div class="timeline">
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-date">
+              2024 — PRESENT
+            </div>
+
+            <h3>
+              Engineering Degree — Optics & Photonics
+            </h3>
+
+            <div class="place">
+              Institut d'Optique Graduate School · Université Paris-Saclay
+            </div>
+
+            <p>
+              Engineering studies specializing in optical engineering,
+              photonics and imaging systems. Coursework includes quantum
+              optics, laser physics, semiconductor physics and optical design.
             </p>
 
             <div class="tags">
               <span class="tag">Optical engineering</span>
               <span class="tag">Photonics</span>
-              <span class="tag">Physics</span>
+              <span class="tag">Quantum optics</span>
+              <span class="tag">Laser physics</span>
+              <span class="tag">Semiconductors</span>
             </div>
           </div>
 
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-date">
+              2022 — 2024
+            </div>
+
+            <h3>
+              Classe Préparatoire aux Grandes Écoles
+            </h3>
+
+            <div class="place">
+              Lycée Champollion · Grenoble
+            </div>
+
+            <p>
+              Two-year intensive MPSI → PSI preparatory program
+              with advanced coursework in mathematics and physics,
+              preparing for competitive entrance examinations
+              to French Grandes Écoles.
+            </p>
+          </div>
+
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+
+            <div class="timeline-date">
+              2022
+            </div>
+
+            <h3>
+              French General Baccalaureate
+            </h3>
+
+            <div class="place">
+              Lycée Champollion · Grenoble
+            </div>
+
+            <p>
+              Mathematics and Engineering Science.
+              Graduated with highest honors.
+            </p>
+          </div>
+
         </div>
+
       </div>
     </section>
 
-    <section id="projects">
+
+    <section id="skills">
       <div class="container reveal">
 
-        <div class="section-kicker">Projects</div>
+        <div class="section-kicker">Skills</div>
 
-        <h2>Selected work.</h2>
+        <h2>Technical toolbox.</h2>
 
-        <p class="section-copy">
-          A few examples of technical projects spanning quantum experiments,
-          electronics and photonics.
-        </p>
+        <div class="skills-grid">
+
+          <div class="skill-card">
+            <h3>Programming</h3>
+            <p>
+              Python · MATLAB · SolidWorks
+            </p>
+          </div>
+
+          <div class="skill-card">
+            <h3>Quantum Experiments</h3>
+            <p>
+              Spectroscopy · Rabi · T1 · Ramsey ·
+              Spin echo · Coherence measurements
+            </p>
+          </div>
+
+          <div class="skill-card">
+            <h3>Signal Processing</h3>
+            <p>
+              Fourier analysis · Digital filtering ·
+              Time-frequency analysis
+            </p>
+          </div>
+
+          <div class="skill-card">
+            <h3>Instrumentation</h3>
+            <p>
+              Oscilloscopes · Spectrum analysers ·
+              Laser systems · Function generators
+            </p>
+          </div>
+
+          <div class="skill-card">
+            <h3>Electronics & Simulation</h3>
+            <p>
+              LTspice · Signal integrity ·
+              Impedance matching · Experimental electronics
+            </p>
+          </div>
+
+          <div class="skill-card">
+            <h3>Scientific Writing</h3>
+            <p>
+              LaTeX · Technical reports ·
+              Academic documentation
+            </p>
+          </div>
+
+        </div>
+
+
+        <div style="margin-top:80px;">
+
+          <div class="section-kicker">Languages</div>
+
+          <div class="languages">
+
+            <div class="language">
+              <strong>French</strong>
+              <span>Native</span>
+            </div>
+
+            <div class="language">
+              <strong>English</strong>
+              <span>Fluent · C1</span>
+            </div>
+
+            <div class="language">
+              <strong>Mandarin Chinese</strong>
+              <span>Intermediate · B2</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <section id="interests">
+      <div class="container reveal">
+
+        <div class="section-kicker">Beyond engineering</div>
+
+        <h2>Outside the lab.</h2>
 
         <div class="projects">
 
-          <article class="project">
-            <small>Quantum systems</small>
-            <h3>Qubit characterization</h3>
-            <p>
-              Spectroscopy, Rabi oscillations, T1 measurements,
-              Ramsey experiments and spin-echo characterization.
-            </p>
-          </article>
+          <div class="project">
+            <small>Sport</small>
 
-          <article class="project">
-            <small>Electronics</small>
-            <h3>TTL signal merger</h3>
-            <p>
-              LTspice simulation of high-speed digital signal paths,
-              impedance matching and ringing reduction.
-            </p>
-          </article>
+            <h3>Basketball</h3>
 
-          <article class="project">
-            <small>Photonics</small>
-            <h3>Optical control systems</h3>
             <p>
-              Work on optical delivery, photodiodes,
-              cryogenic integration and optical control architectures.
+              Long-standing involvement as a player,
+              referee and youth coach.
             </p>
-          </article>
+          </div>
+
+          <div class="project">
+            <small>Outdoors</small>
+
+            <h3>Mountains & Hiking</h3>
+
+            <p>
+              Hiking and mountain activities are an important
+              part of my life outside engineering.
+            </p>
+          </div>
+
+          <div class="project">
+            <small>International</small>
+
+            <h3>Travel & Cultures</h3>
+
+            <p>
+              Born in Japan, lived there for four years
+              and later spent two years in Singapore,
+              developing a strong interest in international
+              environments.
+            </p>
+          </div>
 
         </div>
+
       </div>
     </section>
+
 
     <section id="contact">
       <div class="container reveal">
 
         <div class="contact">
+
           <div class="section-kicker">Contact</div>
 
-          <h2>Let's build something interesting.</h2>
+          <h2>Let's connect.</h2>
 
           <p class="section-copy">
+            Interested in optics, photonics, quantum technologies,
+            semiconductor physics and scientific engineering.
             Feel free to reach out regarding research,
-            engineering projects, internships or collaborations.
+            engineering projects or collaboration opportunities.
           </p>
 
           <div class="cta-row">
-            <a class="btn primary" href="mailto:your.email@example.com">
+
+            <a
+              class="btn primary"
+              href="mailto:depre.masao@gmail.com"
+            >
               Email me
             </a>
 
-            <a class="btn secondary" href="https://www.linkedin.com/" target="_blank">
+            <a
+              class="btn secondary"
+              href="https://www.linkedin.com/in/masao-depre-58bb96230/"
+              target="_blank"
+            >
               LinkedIn ↗
             </a>
+
           </div>
+
         </div>
 
       </div>
@@ -778,13 +1157,16 @@
 
   </main>
 
+
   <footer>
     <div class="container">
-      © 2026 Masao Dépré
+      © 2026 Masao Dépré · Optics · Photonics · Quantum Engineering
     </div>
   </footer>
 
+
   <script>
+
     const revealElements = document.querySelectorAll('.reveal');
 
     const observer = new IntersectionObserver(entries => {
@@ -797,17 +1179,23 @@
 
     revealElements.forEach(el => observer.observe(el));
 
+
     const themeToggle = document.getElementById('themeToggle');
 
     themeToggle.addEventListener('click', () => {
+
       document.body.classList.toggle('light');
+
       themeToggle.textContent =
         document.body.classList.contains('light') ? '☾' : '☼';
+
     });
+
 
     const card = document.getElementById('profileCard');
 
     card.addEventListener('mousemove', e => {
+
       const rect = card.getBoundingClientRect();
 
       const x = e.clientX - rect.left;
@@ -817,13 +1205,19 @@
       const rotateX = ((y / rect.height) - 0.5) * -10;
 
       card.style.transform =
-        `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        `perspective(900px)
+         rotateX(${rotateX}deg)
+         rotateY(${rotateY}deg)`;
+
     });
 
     card.addEventListener('mouseleave', () => {
+
       card.style.transform =
         'perspective(900px) rotateX(0deg) rotateY(0deg)';
+
     });
+
   </script>
 
 </body>
