@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Masao Dépré — Engineering Student</title>
+
+  <meta
+    name="description"
+    content="Personal website of Masao Dépré, engineering student interested in optics, photonics, quantum technologies and experimental physics."
+  />
+
+  <meta name="author" content="Masao Dépré" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(80, 90, 255, 0.08), transparent 30%),
+        radial-gradient(circle at top right, rgba(0, 200, 255, 0.07), transparent 25%),
+        #0b0d12;
+      color: #f4f4f5;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: auto;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: rgba(11, 13, 18, 0.72);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-size: 0.95rem;
+      color: #b8bac2;
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    .hero {
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      padding: 80px 0;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 0.8fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 999px;
+      color: #b8bac2;
+      background: rgba(255,255,255,0.03);
+      margin-bottom: 22px;
+      font-size: 0.9rem;
+    }
+
+    h1 {
+      font-size: clamp(3.6rem, 8vw, 7rem);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      margin-bottom: 24px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #ffffff, #7ea7ff, #66e0ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-text {
+      max-width: 720px;
+      font-size: 1.25rem;
+      color: #b8bac2;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 32px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 19px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: 0.2s ease;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background: white;
+      color: #111318;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.035);
+      color: white;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .profile-card {
+      min-height: 390px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02));
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      box-shadow: 0 30px 70px rgba(0,0,0,0.25);
+    }
+
+    .profile-placeholder {
+      flex: 1;
+      border-radius: 20px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background:
+        linear-gradient(135deg, rgba(126,167,255,0.22), rgba(102,224,255,0.08)),
+        #12151d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9ea2ad;
+      text-align: center;
+      padding: 20px;
+    }
+
+    section {
+      padding: 100px 0;
+    }
+
+    .section-label {
+      color: #7ea7ff;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      letter-spacing: -0.045em;
+      margin-bottom: 28px;
+    }
+
+    .section-intro {
+      max-width: 760px;
+      color: #aaadb7;
+      font-size: 1.1rem;
+      margin-bottom: 45px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      padding: 26px;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px;
+      background: rgba(255,255,255,0.025);
+      transition: 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(126,167,255,0.35);
+      background: rgba(255,255,255,0.045);
+    }
+
+    .card .small {
+      color: #7ea7ff;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: #a5a8b2;
+    }
+
+    .experience {
+      display: grid;
+      gap: 18px;
+    }
+
+    .experience-row {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 30px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 28px 0;
+    }
+
+    .experience-date {
+      color: #777c89;
+      font-size: 0.95rem;
+    }
+
+    .experience-row h3 {
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+    }
+
+    .experience-row p {
+      color: #a5a8b2;
+      max-width: 760px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .tag {
+      padding: 7px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #b7bac3;
+      font-size: 0.85rem;
+    }
+
+    .contact-box {
+      padding: 45px;
+      border-radius: 28px;
+      background:
+        linear-gradient(135deg, rgba(126,167,255,0.14), rgba(102,224,255,0.06));
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    footer {
+      padding: 40px 0 60px;
+      color: #70747e;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 850px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .experience-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .profile-card {
+        min-height: 320px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="container nav-inner">
+      <div class="logo">MASAO DEPRÉ</div>
+
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <section class="hero">
+      <div class="container hero-grid">
+
+        <div>
+          <div class="eyebrow">
+            Engineering · Physics · Quantum Technologies
+          </div>
+
+          <h1>
+            Masao
+            <span class="gradient-text">Dépré.</span>
+          </h1>
+
+          <p class="hero-text">
+            Engineering student interested in optics, photonics,
+            quantum technologies and experimental physics.
+            I enjoy working at the intersection of science,
+            engineering and real-world experimentation.
+          </p>
+
+          <div class="buttons">
+            <a class="btn btn-primary" href="#experience">
+              Explore my work
+            </a>
+
+            <a class="btn btn-secondary"
+               href="https://www.linkedin.com/"
+               target="_blank">
+              LinkedIn ↗
+            </a>
+
+            <a class="btn btn-secondary"
+               href="https://github.com/"
+               target="_blank">
+              GitHub ↗
+            </a>
+          </div>
+        </div>
+
+        <div class="profile-card">
+          <div class="profile-placeholder">
+            Add your photo here later
+            <br><br>
+            You can replace this block
+            with an &lt;img&gt;.
+          </div>
+
+          <strong>Based in France</strong>
+          <span style="color:#8f939d;">
+            Open to research & engineering opportunities
+          </span>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-label">About</div>
+
+        <h2>
+          Physics, engineering
+          & experimentation.
+        </h2>
+
+        <p class="section-intro">
+          I am an engineering student with a strong interest in
+          optics, photonics and quantum technologies.
+          My work combines theoretical understanding with
+          experimental systems, electronics, simulations
+          and data analysis.
+        </p>
+
+        <div class="tags">
+          <span class="tag">Photonics</span>
+          <span class="tag">Quantum physics</span>
+          <span class="tag">Optics</span>
+          <span class="tag">Experimental physics</span>
+          <span class="tag">Python</span>
+          <span class="tag">Electronics</span>
+          <span class="tag">Data analysis</span>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="container">
+        <div class="section-label">Experience</div>
+
+        <h2>Selected experience.</h2>
+
+        <div class="experience">
+
+          <div class="experience-row">
+            <div class="experience-date">
+              2026
+            </div>
+
+            <div>
+              <h3>
+                Research Internship — RIKEN
+              </h3>
+
+              <p>
+                Research internship focused on superconducting
+                quantum systems, optical and microwave control,
+                qubit characterization and experimental electronics.
+              </p>
+
+              <div class="tags">
+                <span class="tag">Quantum computing</span>
+                <span class="tag">Superconducting qubits</span>
+                <span class="tag">Microwave control</span>
+                <span class="tag">Photonics</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="experience-row">
+            <div class="experience-date">
+              Engineering studies
+            </div>
+
+            <div>
+              <h3>
+                Institut d'Optique Graduate School
+              </h3>
+
+              <p>
+                Engineering curriculum focused on optics,
+                photonics, physics and advanced optical systems.
+              </p>
+
+              <div class="tags">
+                <span class="tag">Optical engineering</span>
+                <span class="tag">Photonics</span>
+                <span class="tag">Physics</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-label">Projects</div>
+
+        <h2>Things I've worked on.</h2>
+
+        <p class="section-intro">
+          A selection of technical and scientific projects.
+          You can progressively replace these examples with
+          your own projects, figures and GitHub repositories.
+        </p>
+
+        <div class="cards">
+
+          <div class="card">
+            <div class="small">Quantum systems</div>
+
+            <h3>
+              Qubit characterization
+            </h3>
+
+            <p>
+              Experimental characterization using spectroscopy,
+              Rabi oscillations, T1 measurements, Ramsey experiments
+              and spin-echo techniques.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="small">Electronics</div>
+
+            <h3>
+              TTL signal merger
+            </h3>
+
+            <p>
+              Simulation and optimization of high-speed digital
+              signal paths, impedance matching and ringing reduction
+              using LTspice.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="small">Photonics</div>
+
+            <h3>
+              Optical control systems
+            </h3>
+
+            <p>
+              Work on optical signal delivery, photodiodes,
+              cryogenic integration and optical control architectures.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+
+        <div class="contact-box">
+          <div class="section-label">Contact</div>
+
+          <h2>Let's connect.</h2>
+
+          <p class="section-intro">
+            Feel free to reach out regarding research,
+            engineering projects, internships or collaborations.
+          </p>
+
+          <div class="buttons">
+            <a
+              class="btn btn-primary"
+              href="mailto:your.email@example.com"
+            >
+              Email me
+            </a>
+
+            <a
+              class="btn btn-secondary"
+              href="https://www.linkedin.com/"
+              target="_blank"
+            >
+              LinkedIn ↗
+            </a>
+
+            <a
+              class="btn btn-secondary"
+              href="https://github.com/"
+              target="_blank"
+            >
+              GitHub ↗
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      © 2026 Masao Dépré
+    </div>
+  </footer>
+
+</body>
+</html>
